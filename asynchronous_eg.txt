@@ -1,0 +1,15 @@
+void getData() async {
+
+    //simulate a network request for a username
+    String username = await Future.delayed(Duration(seconds: 3), () {
+      return 'xyber';
+    });
+
+    //simulate network request to get bio of the username
+    String bio = await Future.delayed(Duration(seconds: 2), () {
+      return 'gamer, programmer & flutter developer';
+    });
+
+    print('$username = $bio');
+
+  }
