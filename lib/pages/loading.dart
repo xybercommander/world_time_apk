@@ -17,7 +17,7 @@ class _LoadingState extends State<Loading> {
       'location': instance.location,
       'flag': instance.flag,
       'time': instance.time,
-      'isDayTime': instance.isDayTime,
+      'isDayTime': instance.isDayTime, //this is for the background color of the app
     });
   }
 
@@ -31,7 +31,7 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(      
-      backgroundColor: Colors.blue[900],
+      backgroundColor: Colors.blueGrey[900],
       body: Center(
         child: SpinKitFadingCube(
           color: Colors.white,

@@ -24,10 +24,10 @@ class _HomeState extends State<Home> {
     String bgImage = (data['isDayTime'] == true) ? 'animeMorning.jpg' : 'animeNight.jpg';
     Color bgColor = (data['isDayTime'] == true) ?  morningColor : nightColor;
 
+    //UI of the home layout
+
     return Scaffold(
-
       backgroundColor: bgColor,
-
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -37,9 +37,10 @@ class _HomeState extends State<Home> {
             )
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 120),
+            padding: const EdgeInsets.only(top: 105),
             child: Column(
               children: <Widget> [
+
                 /*1*/
                 FlatButton.icon(
                   onPressed: () {
@@ -47,17 +48,21 @@ class _HomeState extends State<Home> {
                   },
                   icon: Icon(
                     Icons.edit_location,
-                    color: Colors.grey[400],
+                    color: data['isDayTime'] ? Colors.grey[400] : Colors.blueGrey[100],
                   ),
                   label: Text(
                     'Edit Location',
                     style: TextStyle(
-                      color: Colors.grey[400],
+                      color: data['isDayTime'] ? Colors.grey[400] : Colors.blueGrey[100],
+                      fontFamily: 'IndieFlower',
+                      fontSize: 25
                     ),
                   ),
                 ),
+
                 /*2*/
                 SizedBox(height: 20),
+
                 /*3*/
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -68,19 +73,21 @@ class _HomeState extends State<Home> {
                       style: TextStyle(
                         fontSize: 28,
                         letterSpacing: 2,
-                        color: Colors.orange[100],
+                        color: data['isDayTime'] ? Colors.orange[100] : Colors.white,
+                        fontFamily: 'IndieFlower'
                       )
                     )
                   ],
                 ),
                 /*2*/
-                SizedBox(height: 20),
+                SizedBox(height: 1),
                 /*3*/
                 Text(
                   data['time'],
                   style: TextStyle(
-                    fontSize: 66,
-                    color: Colors.orange[100],
+                    fontSize: 70,
+                    color: data['isDayTime'] ? Colors.orange[100] : Colors.white,
+                    fontFamily: 'IndieFlower'
                   ),
                 )
               ]
