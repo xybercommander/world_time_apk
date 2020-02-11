@@ -40,7 +40,7 @@ class WorldTime {
     now = now.add(Duration(hours: int.parse(offset_hour), minutes: int.parse(offset_min)));
     
     //set the time property
-    isDayTime = now.hour > 6 && now.hour < 19 ? true : false;  
+    isDayTime = now.hour > 6 && now.hour < 10 ? true : false;  
     time = DateFormat.jm().format(now);
 
     }
