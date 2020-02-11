@@ -18,7 +18,24 @@ class _ChooseLocationState extends State<ChooseLocation> {
     WorldTime(url: 'Asia/Seoul', location: 'Seoul', flag: 'south_korea.png'),
     WorldTime(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
     WorldTime(url: 'Asia/Kolkata', location: 'Kolkata', flag: 'india.png'),
+    WorldTime(url: 'Europe/Berlin', location: 'Berlin', flag: 'germany.png'),
   ];
+
+  void updateTime(index) async {
+    WorldTime instance = locations[index];
+    await instance.getTime();
+
+    //we need to navigate to the home screen and show the data
+    Navigator.pop(context, {
+      /*We don't need arguements over here because we are popping*/
+
+      //We need to send location, flag and time to the home route
+      'location': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
+      'isDayTime': instance.isDayTime, //this is for the background color of the app
+    });
+  }
 
 
   @override
@@ -34,11 +51,21 @@ class _ChooseLocationState extends State<ChooseLocation> {
       body: ListView.builder(
         itemCount: locations.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              onTap: () {},
-              title: Text(locations[index].location),
-              
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 1,
+              horizontal: 4
+            ),
+            child: Card(
+              child: ListTile(
+                onTap: () {
+                  updateTime(index);
+                },
+                title: Text(locations[index].location),
+                leading: CircleAvatar(                
+                  backgroundImage: AssetImage('assets/${locations[index].flag}'),
+                ),
+              ),
             ),
           );
         },

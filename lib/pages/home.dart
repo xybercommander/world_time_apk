@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
     Color nightColor = HexColor("#10193A");
 
     //getting the data from the load route
-    data = ModalRoute.of(context).settings.arguments;
+    data = data.isNotEmpty ? data : ModalRoute.of(context).settings.arguments;
     print(data);
 
     //setting the background
@@ -43,12 +43,20 @@ class _HomeState extends State<Home> {
 
                 /*1*/
                 FlatButton.icon(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/location');
+                  onPressed: () async {
+                    dynamic result = await Navigator.pushNamed(context, '/location');
+                    setState(() {
+                      data = {
+                        'time': result['time'],
+                        'location': result['location'],
+                        'isDayTime': result['isDayTime'],
+                        'flag': result['flag']
+                      };
+                    });
                   },
                   icon: Icon(
                     Icons.edit_location,
-                    color: data['isDayTime'] ? Colors.grey[400] : Colors.blueGrey[100],
+                    color: data['isDayTime'] ? Colors.grey[400] : Colors.blueGrey[100],                  
                   ),
                   label: Text(
                     'Edit Location',
@@ -87,7 +95,8 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                     fontSize: 70,
                     color: data['isDayTime'] ? Colors.orange[100] : Colors.white,
-                    fontFamily: 'IndieFlower'
+                    fontFamily: 'IndieFlower',
+                    letterSpacing: 4
                   ),
                 )
               ]

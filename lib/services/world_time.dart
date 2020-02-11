@@ -29,6 +29,7 @@ class WorldTime {
 
     String offset_hour = offset.substring(1, 3);
     String offset_min = offset.substring(4, 6);
+    String meridian = offset[0]; //for + or - offset
 
     // print(datetime);
     // print(offset);
@@ -37,7 +38,11 @@ class WorldTime {
 
     //create a datetime object
     DateTime now = DateTime.parse(datetime);
-    now = now.add(Duration(hours: int.parse(offset_hour), minutes: int.parse(offset_min)));
+    if(meridian == '+'){
+      now = now.add(Duration(hours: int.parse(offset_hour), minutes: int.parse(offset_min)));
+    } else if(meridian == '-'){
+      now = now.subtract(Duration(hours: int.parse(offset_hour), minutes: int.parse(offset_min)));
+    }
     
     //set the time property
     isDayTime = now.hour > 6 && now.hour < 19 ? true : false;  
